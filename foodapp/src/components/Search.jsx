@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 const URL = "https://api.spoonacular.com/recipes/complexSearch";
 const API_KEY = "68047e7ddc81442c82fcce7c937837da";
 
-export default function Search() {
+export default function Search({ foodData, setFoodData }) {
   const [query, setQuery] = useState("pizza");
 
   // Syntax of the useEffects hook
@@ -10,7 +10,8 @@ export default function Search() {
     async function fetchFood() {
       const res = await fetch(`${URL}?query=${query}&apiKey=${API_KEY}`);
       const data = await res.json();
-      console.log(data);
+      console.log(data.results);
+      setFoodData(data.results);
     }
     fetchFood();
   }, [query]);
